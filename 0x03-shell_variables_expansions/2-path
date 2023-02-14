@@ -1,2 +1,2 @@
 #!/bin/bash
-touch PATH/action OPTIND
+export PATH=$PATH:/action
