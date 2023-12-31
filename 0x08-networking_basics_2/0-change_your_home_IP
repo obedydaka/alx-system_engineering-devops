@@ -1,6 +1,20 @@
-#!/usr/bin/env bash
-# A script that used as an IP set up for working in docker
-cp /etc/hosts ~/hosts.new
-sed -i s/127.0.0.1/127.0.0.2/ ~/hosts.new
-echo '8.8.8.8	facebook.com' >> ~/hosts.new
-cat ~/hosts.new > /etc/hosts
+#!/bin/bash
+
+# Backup the original /etc/hosts file
+sudo cp /etc/hosts /etc/hosts.bak
+
+# Check if Docker is running
+docker_running=$(docker info > /dev/null 2>&1 && echo "true" || echo "false")
+
+if [ "$docker_running" == "true" ]; then
+    # Modify /etc/hosts to set localhost to 127.0.0.2 and facebook.com to 8.8.8.8
+    sudo sed -i 's/127.0.0.1[[:space:]]\+localhost/127.0.0.2 localhost/' /etc/hosts
+    sudo sed -i 's/^.*facebook.com/8.8.8.8 facebook.com/' /etc/hosts
+
+    # Display the updated /etc/hosts file
+    cat /etc/hosts
+
+    echo "Configuration complete!"
+else
+    echo "Error: Docker is not running. Please make sure Docker is running and try again."
+fi
