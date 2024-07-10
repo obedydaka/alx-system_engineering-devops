@@ -2,3 +2,4 @@
 
 # Use the 'ip' command to display active IPv4 IPs
 ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | sort -u
+
