@@ -1,20 +1,14 @@
 #!/usr/bin/env bash
-
 # Update package lists
 apt-get update
 
-# Install Nginx
 apt-get install -y nginx
 
-# Configure Nginx to serve a custom page
 echo 'Hello World!' > /var/www/html/index.html
 
-# Ensure Nginx is listening on port 80
 sed -i 's/listen 80 default_server;/listen 80;/' /etc/nginx/sites-available/default
 sed -i 's/listen \[::\]:80 default_server;/listen \[::\]:80;/' /etc/nginx/sites-available/default
 
-# Reload Nginx configuration
 nginx -s reload
 
-# Restart Nginx without using systemctl
 service nginx restart
