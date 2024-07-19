@@ -1,6 +1,6 @@
-# This manifest kills a process named killmenow using pkill
-exec { 'kill_killmenow':
-  command => '/usr/bin/pkill killmenow',
+# This manifest installs a package
+exec { 'install_flask':
+  command => '/usr/bin/pip3 install flask==2.1.0',
   path    => ['/usr/bin', '/bin'],
-  onlyif  => '/usr/bin/pgrep killmenow',
+  unless  => '/usr/bin/pip3 show flask | grep -q "Version: 2.1.0"',
 }
