@@ -1,2 +1,8 @@
 #!/usr/bin/env ruby
-puts ARGV[0].scan(/^4155049898$/).join
+
+# This script accepts one argument and matches a 10-digit phone number
+input = ARGV[0]
+if input
+  matches = input.scan(/^\d{10}$/)
+  puts matches.join
+end

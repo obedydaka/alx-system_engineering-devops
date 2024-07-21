@@ -1,2 +1,8 @@
 #!/usr/bin/env ruby
-puts ARGV[0].scan(/[A-Z]/).join
+
+# This script accepts one argument and matches only capital letters
+input = ARGV[0]
+if input
+  matches = input.scan(/[A-Z]/)
+  puts matches.join
+end

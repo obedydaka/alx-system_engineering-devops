@@ -1,2 +1,8 @@
 #!/usr/bin/env ruby
-puts ARGV[0].scan(/hb?tn/).join
+
+# This script accepts one argument and matches the pattern htn and hbtn
+input = ARGV[0]
+if input
+  matches = input.scan(/hb?t?n/)
+  puts matches.join
+end
