@@ -1,2 +1,8 @@
 #!/usr/bin/env ruby
-puts ARGV[0].scan(/School/).join
+
+# This script accepts one argument and matches "School" using a regular expression
+input = ARGV[0]
+if input
+  matches = input.scan(/School/)
+  puts matches.join
+end
