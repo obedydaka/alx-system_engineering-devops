@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
-# Update package lists
-apt-get update
+# Update package list and install nginx
+sudo apt-get update -y
+sudo apt-get install nginx -y
 
-apt-get install -y nginx
+# Create a custom HTML page
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-echo 'Hello World!' > /var/www/html/index.html
+# Restart nginx to apply changes
+sudo service nginx restart
 
-sed -i 's/listen 80 default_server;/listen 80;/' /etc/nginx/sites-available/default
-sed -i 's/listen \[::\]:80 default_server;/listen \[::\]:80;/' /etc/nginx/sites-available/default
-
-nginx -s reload
-
-service nginx restart
+# Check if nginx is running and listening on port 80
+if sudo netstat -tuln | grep -q ':80.*LISTEN'; then
+    echo "Nginx is running and listening on port 80."
+else
+    echo "Failed to start Nginx or bind to port 80."
+    exit 1
+fi
